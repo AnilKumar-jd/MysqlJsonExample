@@ -3,10 +3,7 @@ package com.json.example.jsonExample;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,11 @@ public class JsonController {
     public List<PatientProfile> json() throws JsonProcessingException {
         List<PatientProfile> dto = jsonRepo.findAll();
         return dto;
+    }
+
+    @RequestMapping(value = "/json/save", method = RequestMethod.POST, produces = "application/json")
+    public PatientProfile json(@RequestBody PatientProfile dto) throws JsonProcessingException {
+        PatientProfile dto1 = jsonRepo.save(dto);
+        return dto1;
     }
 }

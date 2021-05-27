@@ -3,10 +3,7 @@ package com.json.example.jsonExample;
 
 import lombok.Data;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Map;
@@ -26,6 +23,8 @@ public class PatientProfile implements Serializable {
     private LocalDate dateOfBirth;
 
     /* This converter does the trick */
+
+    @Column(columnDefinition = "json")
     @Convert(converter = StringMapConverter.class)
     private Map<String, Object> otherAttributes;
 
